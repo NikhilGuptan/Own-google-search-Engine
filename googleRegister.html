@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body{
+            background-color: rgb(34, 30, 30);
+            color: white;
+        }
+        #div {
+            display: flex;
+            border: 1px solid black;
+            background-color: wheat;
+            justify-content: flex-end;
+        }
+
+        #div button {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px;
+            background-color: white;
+            border: none;
+            border-radius: 5px;
+            
+            
+        }
+        #div button:hover{
+            cursor: pointer;
+            box-shadow: 0 0 11px rgba(33,33,33,.2); 
+        }
+
+          #forms {
+      display: flex;
+      align-items: center;
+    }
+
+    form {
+      width: 10%;
+      
+    }
+
+    #forms div {
+      flex: 1;
+      padding-left: 20%;
+    }
+    input{
+        padding: 5px;
+    }
+
+    </style>
+</head>
+<body>
+
+    <div id="div">
+        <button id="home" onclick="home()">Home</button>
+        <button id="login" onclick="login()">LogIn</button>
+        <button id="signup">Register</button>
+    </div>
+
+    <h1>Masai Auto System</h1>
+    <div id="forms">
+        <div id="Register">
+            <h1>Register</h1>
+            <form onsubmit="Register(event)">
+                Name: <input type="text" id="inp1" /> Email: <input type="email" id="inp2" /> Password:
+                <input type="password" id="inp3" /> Username: <input type="text" id="inp4" /> Mobile:
+                <input type="text" id="inp5" /> Description: <input type="text" id="inp6" />
+                <input type="submit" />
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+
+
+    function login(){
+
+        window.location.href = "googleLogin.html"
+
+    }
+
+    function Register(e){
+
+        e.preventDefault();
+
+        let formdata = {
+
+            name:document.getElementById("inp1").value,
+            email: document.getElementById("inp2").value,
+            password: document.getElementById("inp3").value,
+            username: document.getElementById("inp4").value,
+            mobile: document.getElementById("inp5").value,
+            description: document.getElementById("inp6").value,
+        };
+
+        //console.log(formdata);
+
+        formdata = JSON.stringify(formdata);
+        console.log(formdata);
+
+        fetch("https:masai-api-mocker.herokuapp.com/auth/register",{
+
+        method:"POST",
+
+        body:formdata,
+
+        headers:{
+
+            "Content-Type":"application/json",
+
+        }
+
+        })
+        .then((res)=>{
+            return res.json();
+        })
+        .then((res)=>{
+            console.log(res);
+            alert("You have Succsefuly Register you can go to logIn page")
+        })
+        .catch((err)=>{
+            alert(err)
+        })
+
+    }
+
+
+
+</script>

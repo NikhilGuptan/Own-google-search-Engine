@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body{
+            background-color: rgb(34, 30, 30);
+            color: white;
+        }
+        #div {
+            display: flex;
+            border: 1px solid black;
+            background-color: wheat;
+            justify-content: flex-end;
+        }
+
+        #div button {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px;
+            background-color: white;
+            border: none;
+            border-radius: 5px;
+            
+            
+        }
+        #div button:hover{
+            cursor: pointer;
+            box-shadow: 0 0 11px rgba(33,33,33,.2); 
+        }
+
+           #forms {
+      display: flex;
+      align-items: center;
+    }
+
+    form {
+      width: 10%;
+    }
+
+    #forms div {
+      flex: 1;
+      padding-left: 20%;
+    }
+
+    </style>
+</head>
+<body>
+    
+    <div id="div">
+        <button id="home">Home</button>
+        <button id="login">LogIn</button>
+        <button id="signup" onclick="register()">Register</button>
+    </div>
+
+    <div id="forms">
+        <div id="Login">
+            <h1>Login</h1>
+            <form onsubmit="Login(event)">
+                Username: <input type="text" id="inp7" />
+    
+                Password: <input type="password" id="inp8" />
+                <input type="submit" />
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+
+    function register(){
+        window.location.href = "googleRegister.html"
+    }
+
+function Login(e){
+    e.preventDefault();
+
+    let formdata = {
+        password:document.getElementById("inp8").value,
+        username: document.getElementById("inp7").value,
+    }
+
+    let body = JSON.stringify(formdata);
+    console.log(formdata);
+
+      fetch("https:masai-api-mocker.herokuapp.com/auth/login", {
+
+        method: "POST",
+
+        body: body,
+
+        headers: {
+
+            "Content-Type": "application/json",
+
+        }
+
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .then((res) => {
+            console.log(res);
+
+            // let u = formdata.username;
+            // let t = res.token;
+            // getmyProfile(u,t)
+
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+}
+
+
+</script>
