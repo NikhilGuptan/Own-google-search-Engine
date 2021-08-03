@@ -123,12 +123,20 @@
             return res.json();
         })
         .then((res)=>{
+            
             console.log(res);
-            alert("You have Succsefuly Register you can go to logIn page")
+            if(res.error){
+                alert(res.message)
+            }else if(res.error==false){
+                alert("You succsfuly register you can go to login page")
+            }
+            
         })
         .catch((err)=>{
             alert(err)
         })
+
+        
 
     }
 

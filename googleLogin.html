@@ -112,10 +112,14 @@ function Login(e){
             // let u = formdata.username;
             // let t = res.token;
             // getmyProfile(u,t)
+            if(res.error==false){
+                window.location.href = "googleHome.html"
+            }
 
         })
         .catch((err) => {
             console.log(err);
+            alert("wroung UserName and password")
         })
 }
 
